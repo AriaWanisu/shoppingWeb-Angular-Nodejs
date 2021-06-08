@@ -1,0 +1,21 @@
+.btn {
+    border: 2px solid white;
+    border-radius: 10px;
+    padding: 8px 16px;
+    font-size: 28px;
+    cursor: pointer;
+  }
+
+  .img-responsive {
+    max-width: 15%;
+    display: block;
+    height: auto;
+    float: left;
+  }
+  
+  .img-box {
+    height: 25;
+    width: 50%;
+    position: relative;
+  }
+  

@@ -56,7 +56,7 @@ router.route('/signup')
                     console.log(err);
                 })
         })
-        .catch(() => {
+        .catch(err => {
 
         })
     })

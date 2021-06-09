@@ -1,21 +1,118 @@
-.btn {
-    border: 2px solid white;
-    border-radius: 10px;
-    padding: 8px 16px;
-    font-size: 28px;
-    cursor: pointer;
-  }
+@import "https://fonts.googleapis.com/css?family=Kanit|Prompt";
 
-  .img-responsive {
-    max-width: 15%;
-    display: block;
-    height: auto;
-    float: left;
-  }
-  
-  .img-box {
-    height: 25;
-    width: 50%;
-    position: relative;
-  }
-  
+.btn {
+  border: 2px solid white;
+  border-radius: 10px;
+  padding: 8px 16px;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.drop{
+  border: 2px solid white;
+  border-radius: 10px;
+  padding: 95px 40px;
+  cursor: pointer;
+  color: white;
+  margin-right: 50px;
+}
+/* ---------------------------------------------------
+    SIDEBAR STYLE
+----------------------------------------------------- */
+
+.wrapper {
+  display: flex;
+  width: 100%;
+}
+
+#sidebar {
+  width: 250px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  z-index: 999;
+  background: #fff;
+  color: #fff;
+  transition: all 0.3s;
+}
+
+#sidebar.active {
+  margin-left: -250px;
+}
+
+#sidebar .sidebar-header {
+  padding: 20px;
+  background: #1895f5;
+}
+
+#sidebar ul.components {
+  padding: 20px 0;
+  border-bottom: 1px solid #fff;
+}
+
+#sidebar ul p {
+  color: rgb(0, 0, 0);
+  padding: 10px;
+}
+
+#sidebar ul li a {
+  padding: 10px;
+  font-size: 1.3em;
+  color: black;
+  display: block;
+  margin-left: 10px;
+  text-decoration: none;
+}
+
+#sidebar ul li a:hover {
+  color: #1895f5;
+  background: rgb(206, 206, 206);
+}
+
+#sidebar ul li.active > a,
+a[aria-expanded="true"] {
+  color: rgb(0, 0, 0);
+  background: #1895f5;
+}
+
+a[data-toggle="collapse"] {
+  position: relative;
+}
+
+.dropdown-toggle::after {
+  display: block;
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+}
+
+ul ul a {
+  font-size: 0.9em !important;
+  padding-left: 30px !important;
+  background: rgb(0, 0, 0);
+}
+
+ul.CTAs {
+  padding: 20px;
+}
+
+ul.CTAs a {
+  text-align: center;
+  font-size: 0.9em !important;
+  display: block;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+a.download {
+  background: rgb(0, 0, 0);
+  color: #1895f5;
+}
+
+a.article,
+a.article:hover {
+  background: #1895f5 !important;
+  color: rgb(0, 0, 0) !important;
+}

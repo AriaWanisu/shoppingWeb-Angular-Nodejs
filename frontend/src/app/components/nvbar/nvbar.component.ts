@@ -9,6 +9,8 @@ import { LocalStorageService } from 'angular-web-storage'
 })
 export class NvbarComponent implements OnInit {
 
+  opened: boolean = false;
+
   constructor(public local: LocalStorageService,private router: Router) { }
 
   ngOnInit(): void {
@@ -18,5 +20,8 @@ export class NvbarComponent implements OnInit {
     this.local.clear();
     this.router.navigate(['/login']);
   }
+
+  nvbarOpen(){
+    this.opened = !this.opened }
 
 }

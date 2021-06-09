@@ -12,6 +12,8 @@ import { RecommendedComponent } from './components/recommended/recommended.compo
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
+import { HeaderComponent } from './components/header/header.component';
+
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import { HomeComponent } from './components/home/home.component';
     RecommendedComponent,
     SidebarComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +32,7 @@ import { HomeComponent } from './components/home/home.component';
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    AngularWebStorageModule
+    AngularWebStorageModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

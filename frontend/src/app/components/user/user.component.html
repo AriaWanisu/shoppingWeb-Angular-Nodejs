@@ -1,0 +1,51 @@
+<app-header></app-header>
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-3">
+            <div class="card" style="margin-top: 20px;margin-left: 50px;">
+                <div class="card-body">
+                    <div class="list-group">
+                        <a href="user" class="list-group-item list-group-item-action active" aria-current="true">
+                            ข้อมูลของฉัน
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action">A second link item</a>
+                        <a href="#" class="list-group-item list-group-item-action">A third link item</a>
+                        <a href="#" class="list-group-item list-group-item-action">A fourth link item</a>
+                        <a href="#" class="list-group-item list-group-item-action disabled" tabindex="-1"
+                            aria-disabled="true">A disabled link item</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-9">
+            <div class="card" style="margin-top: 20px;margin-left: 20px;margin-right: 50px;">
+                <div class="card-body">
+                    <div class="card-title" style="text-align: center;font-family: 'Prompt';">ข้อมูลส่วนตัว</div>
+                    <div class="card">
+                        <div class="card-body">
+                            <table class="table table-borderless">
+                                <thead>
+                                  <tr>
+                                    <td>username:</td>
+                                    <td><b>{{user.username}}</b></td>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td>password:</td>
+                                    <td><b>{{user.password}}</b></td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            <p class="card-text"> </p>
+                            <p class="card-text"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>

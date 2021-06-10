@@ -1,79 +1,81 @@
-const expressFun = require('express')
-const mongoose = require('mongoose')
-const jwt = require('jsonwebtoken')
-const bcrypt = require('bcryptjs')
+const expressFunction = require('express');
+const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 
-const router = expressFun.Router()
+const router = expressFunction.Router();
 
-const key = 'MY_KEY'
+const key = 'MY_KEY';
 
-var Schema = require("mongoose").Schema
+var Schema = require('mongoose').Schema;
 
 const userSchema = Schema({
     username: String,
-    password: String,
-}, {
+    password: String
+},{
     collection: 'users'
-})
+});
 
 let User
 try {
     User = mongoose.model('users')
 } catch (error) {
-    User = mongoose.model('users', userSchema)
+    User = mongoose.model('users', userSchema);
 }
 
-const compareHash = async(plaintext, hastText) => {
+const compareHash = async (plainText, hashText) => {
     return new Promise((resolve, reject) => {
-        bcrypt.compare(plaintext, hastText, (err, data) => {
+        bcrypt.compare(plainText, hashText, (err,data) => {
             if(err){
                 reject(new Error('Error bcrypt compare'))
             }else{
-                resolve({status: data})
+                resolve({status: data});
             }
         })
-    })
+    });
 }
 
 const findUser = (username) => {
-    return new Promise((resolve, reject) =>{
-        User.findOne({username: username}, (err, data) => {
+    return new Promise((resolve, reject) => {
+        User.findOne({username: username}, (err,data) => {
             if(err){
-                reject(new Error('Connont find Username!'))
+                reject(new Error('Cannot find username!'));
             }else{
                 if(data){
-                    resolve({id: data._id, username:data.username, password:data.password})
+                    resolve({id: data._id, username: data.username, password: data.password})
                 }else{
-                    reject(new Error('Connont find Username!'))
+                    reject(new Error('Cannot find username!'));
                 }
             }
         })
     })
-}
+} 
+
 router.route('/signin')
-    .post(async( req, res)=>{
+    .post( async (req, res) => {
         const playload = {
             username: req.body.username,
             password: req.body.password
-        }
+        };
 
-        console.log(playload)
+        console.log(playload);
 
-        try {
-            const result = await findUser(playload.username)
-            const loginStatus = await compareHash(playload.password, result.password)
+        try{
+            const result = await findUser(playload.username);
+            const loginStatus = await compareHash(playload.password, result.password);
 
-            const status = loginStatus.status
+            const status = loginStatus.status;
 
             if(status){
-                const token = jwt.sign(result, key, {expiresIn: 60*5})
-                res.status(200).json({result, token, status})
+                const token = jwt.sign(result, key, {expiresIn: 60*5});
+                res.status(200).json({result, token, status});
             }else{
-                res.status(200).json({status})
+                res.status(200).json({status});
             }
-        } catch {
-            res.status(404).send(error)
+
+        } catch(error){
+            res.status(404).send(error);
         }
     })
 
-module.exports = router
+    module.exports = router

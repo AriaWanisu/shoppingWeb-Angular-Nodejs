@@ -7,7 +7,9 @@
                 <i class="fa fa-bars" aria-hidden="true" style="color: white;"></i>
             </button>
             <!-- logo -->
-            <img src="https://phoenixnext.com/assets/logo.png" style="width: 243px;height: 48px;margin-left: 10px;">
+            <a class="btn" href="#">
+            <img src="https://phoenixnext.com/assets/logo.png"style="width: 243px;height: 48px;margin-left: 10px;">
+            </a>
         </div>
         <div class="col-6">
            
@@ -16,10 +18,10 @@
             <div *ngIf="local.get('user') !== null" class="dropdown">
                 <button class="btn btn-primary dropdown-toggle" type="button" id="user" data-bs-toggle="dropdown"
                     aria-expanded="false">
-                    สวัสดี {{local.get('user').username}}
+                    สวัสดี {{this.local.get('user').result.username}}
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="user">
-                    <li><a class="dropdown-item" href="#">Our Story</a></li>
+                    <li><a class="dropdown-item" href="user">ข้อมูลของฉัน</a></li>
                     <li><a class="dropdown-item" href="#">Our Team</a></li>
                     <li><a class="dropdown-item" href="#" (click)="signout()">Sign Out</a></li>
                 </ul>

@@ -37,7 +37,7 @@ export class HeaderComponent implements OnInit {
       data => {
         if(data.status == true){
           this.router.navigate(['/home'])
-          this.name = this.local.get('user').username;
+          this.name = this.local.get('user').result.username;
         }else{
           alert('Username or Password is incorrect!');
         }

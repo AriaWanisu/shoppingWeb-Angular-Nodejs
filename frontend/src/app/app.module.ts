@@ -13,6 +13,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
+import { UserComponent } from './components/user/user.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { HeaderComponent } from './components/header/header.component';
     SidebarComponent,
     LoginComponent,
     HomeComponent,
-    HeaderComponent
+    HeaderComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,

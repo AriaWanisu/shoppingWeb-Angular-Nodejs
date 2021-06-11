@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms'
+import { FormControl, FormGroup, Validators} from '@angular/forms'
 import { AuthService } from '../../services/auth.service'
 import { Router } from '@angular/router'
 import { LocalStorageService } from 'angular-web-storage'
@@ -16,8 +16,20 @@ export class HeaderComponent implements OnInit {
   name: string;
 
   authForm = new FormGroup({
-    username: new FormControl(''),
+    email: new FormControl(''),
     password: new FormControl(''),
+  });
+
+  profileForm = new FormGroup({
+    firstName: new FormControl('',[Validators.required]),
+    lastName: new FormControl('',[Validators.required]),
+    sex: new FormControl('',[Validators.required]),
+    email: new FormControl('',[Validators.required, Validators.email]),
+    password: new FormControl('',[Validators.required, Validators.minLength(8)]),
+    phone: new FormControl('',[Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/), Validators.minLength(10), Validators.maxLength(10)]),
+    address: new FormGroup({
+     
+    })
   });
 
   constructor(public local: LocalStorageService,private auth: AuthService,private router: Router) {
@@ -51,6 +63,18 @@ export class HeaderComponent implements OnInit {
 
   signout(){
     this.local.clear();
+  }
+
+  signup(){
+    console.log(this.profileForm.value);
+    this.auth.signUp(this.profileForm.value).subscribe(
+      data => {
+        alert('ลงทะเบียนสำเร็จ!!')
+      },
+      err => {
+        console.log(err);
+        alert('Username or Password is incorrect!');
+      });
   }
 
 }

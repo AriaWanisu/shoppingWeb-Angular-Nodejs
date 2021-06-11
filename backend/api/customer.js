@@ -5,9 +5,15 @@ const router = expressFunction.Router();
 
 var Schema = require('mongoose').Schema;
 
+var Schema = require('mongoose').Schema;
 const userSchema = Schema({
-    username: String,
-    password: String
+    email:      { type: String, unique: true },
+    password:   String,
+    firstName:  String,
+    lastName:   String,
+    sex:        String,
+    phone:      String,
+    address:    Schema.Types.Mixed
 },{
     collection: 'users'
 });
@@ -21,7 +27,7 @@ try {
 
 const getCustomer = (cdid) => {
     return new Promise((resolve,reject) => {
-        User.findOne({username: cdid}, (err,data) =>{
+        User.findOne({email: cdid}, (err,data) =>{
             if(err){
                 reject(new Error('err'));
             }else{

@@ -2,14 +2,21 @@ var expressFunction = require('express');
 const router = expressFunction.Router();
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
+var uniqueValidator = require('mongoose-unique-validator');
 
 var Schema = require('mongoose').Schema;
 const userSchema = Schema({
-    username: String,
-    password: String
+    email:      { type: String, unique: true },
+    password:   String,
+    firstName:  String,
+    lastName:   String,
+    sex:        String,
+    phone:      String,
+    address:    Schema.Types.Mixed
 },{
     collection: 'users'
 });
+userSchema.plugin(uniqueValidator);
 
 let User
 try {
@@ -26,8 +33,13 @@ const makeHash = async (plainText) => {
 const insertUser = (dataUser) => {
     return new Promise ((resolve, reject) => {
         var new_user = new User({
-            username: dataUser.username,
-            password: dataUser.password
+            email: dataUser.email,
+            password: dataUser.password,
+            firstName: dataUser.firstName,
+            lastName: dataUser.lastName,
+            sex: dataUser.sex,
+            phone: dataUser.phone,
+            address: dataUser.address
         });
         new_user.save((err, data) => {
             if(err){
@@ -44,8 +56,13 @@ router.route('/signup')
         makeHash(req.body.password)
         .then(hashText => {
             const playload = {
-                username: req.body.username,
+                email: req.body.email,
                 password: hashText,
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
+                sex: req.body.sex,
+                phone: req.body.phone,
+                address: req.body.address
             }
             console.log(playload);
             insertUser(playload)
@@ -55,6 +72,7 @@ router.route('/signup')
                 })
                 .catch(err => {
                     console.log(err);
+                    res.status(400).json("Email ถูกใช้ไปแล้ว");
                 })
         })
         .catch(err => {

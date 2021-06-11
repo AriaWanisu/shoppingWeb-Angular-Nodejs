@@ -24,21 +24,39 @@
                 <div class="card-body">
                     <div class="card-title" style="text-align: center;font-family: 'Prompt';">ข้อมูลส่วนตัว</div>
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-body" style="font-family: 'Prompt';">
                             <table class="table table-borderless">
                                 <thead>
-                                  <tr>
-                                    <td>username:</td>
-                                    <td><b>{{user.username}}</b></td>
-                                  </tr>
+                                    <tr>
+                                        <td>ชื่อ:</td>
+                                        <td><b>{{user.firstName}} {{user.lastName}}</b></td>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                  <tr>
-                                    <td>password:</td>
-                                    <td><b>{{user.password}}</b></td>
-                                  </tr>
+                                    <tr>
+                                        <td>เพศ:</td>
+                                        <td><b>{{user.sex}}</b></td>
+                                    </tr>
                                 </tbody>
-                              </table>
+                                <tbody>
+                                    <tr>
+                                        <td>Email:</td>
+                                        <td><b>{{user.email}}</b></td>
+                                    </tr>
+                                </tbody>
+                                <tbody>
+                                    <tr>
+                                        <td>มือถือ:</td>
+                                        <td><b>{{user.phone}}</b></td>
+                                    </tr>
+                                </tbody>
+                                <tbody>
+                                    <tr>
+                                        <td>address:</td>
+                                        <td><b *ngIf="user.address !== null" >{{user.address.street}} {{user.address.city}} {{user.address.state}} {{user.address.country}} {{user.address.zip}}</b><b *ngIf="user.address == null">ยังไม่ได้ระบุที่อยู่</b></td>
+                                    </tr>
+                                </tbody>
+                            </table>
                             <p class="card-text"> </p>
                             <p class="card-text"></p>
                         </div>
@@ -46,6 +64,6 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
 </div>

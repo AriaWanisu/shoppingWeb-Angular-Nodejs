@@ -16,7 +16,7 @@ export class UserComponent implements OnInit {
   constructor( public local: LocalStorageService,private ms: MemberService,private router: Router) {
     try {
       this.token = this.local.get('user').token;
-      this.id = this.local.get('user').result.username;
+      this.id = this.local.get('user').result.email;
       this.ms.getUser(this.token, this.id).subscribe(
         (data) => {
           this.user = data;

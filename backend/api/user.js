@@ -25,9 +25,9 @@ try {
     User = mongoose.model('users', userSchema);
 }
 
-const getCustomer = (cdid) => {
+const getUser = (id) => {
     return new Promise((resolve,reject) => {
-        User.findOne({email: cdid}, (err,data) =>{
+        User.findOne({email: id}, (err,data) =>{
             if(err){
                 reject(new Error('err'));
             }else{
@@ -41,9 +41,9 @@ const getCustomer = (cdid) => {
     })
 }
 
-router.route('/customer/:cdid').get((req, res) => {
-    const cdid = req.params.cdid;
-    getCustomer(cdid).then(result => {
+router.route('/user/:id').get((req, res) => {
+    const id = req.params.id;
+    getUser(id).then(result => {
         console.log(result);
         res.status(200).json(result);
     })

@@ -2,7 +2,8 @@ var expressFunction = require('express');
 const router = expressFunction.Router();
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
- 
+const authorization = require('../config/authorize')
+
 var Schema = require('mongoose').Schema;
 
 var Schema = require('mongoose').Schema;
@@ -31,13 +32,14 @@ const updateUser = (id,data) => {
             if(err){
                 reject(new err('err'))
             }else{
-                resolve({message: 'add address successfully'})
+                resolve({message: 'Add address successfully'})
             }
         });
     });
 }
 
-router.route('/address').post((req, res) => {
+router.route('/address/:id').put( (req, res) => {
+        const id = req.params.id;
         const playload = {
             street: req.body.street,
             city: req.body.city,
@@ -45,10 +47,11 @@ router.route('/address').post((req, res) => {
             country: req.body.country,
             zip: req.body.zip,
         }
-        updateUser(req.body.id,playload)
+        updateUser(id,playload)
             .then(data => {
                console.log(data);
-               res.status(200).json(data);
+               const status = true;
+               res.status(200).json({data, status});
             })
             .catch(err => {
 

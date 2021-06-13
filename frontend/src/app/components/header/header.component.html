@@ -116,6 +116,11 @@
                                                 <input type="text" class="form-control" 
                                                 placeholder="ชื่อ" formControlName='firstName'>
                                             </div>
+                                            <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="alert alert-danger" role="alert"> 
+                                                <div *ngIf="firstName.errors.required">
+                                                    โปรดระบุชื่อ
+                                                </div>
+                                            </div> 
                                         </div>
                     
                                         <div class="col-md-6">
@@ -123,6 +128,11 @@
                                                 <input type="text" class="form-control" 
                                                 placeholder="นามสกุล" formControlName='lastName'>
                                             </div>
+                                            <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="alert alert-danger" role="alert"> 
+                                                <div *ngIf="lastName.errors.required">
+                                                    โปรดระบุนามสกุล
+                                                </div>
+                                            </div> 
                                         </div>
 
                                         <div class="row" style="margin-top: 20px;font-family: 'Prompt';">
@@ -152,6 +162,14 @@
                                                     placeholder="เบอร์โทร" formControlName='phone'
                                                     style="font-family: 'Prompt';width: 355px;margin-left: 12px;">
                                                 </div>
+                                                <div *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="alert alert-danger" role="alert"> 
+                                                    <div *ngIf="phone.errors.required">
+                                                        โปรดระบุเบอร์โทร
+                                                    </div>
+                                                    <div *ngIf="phone.errors.pattern">
+                                                        โปรดระบุรเบอร์โทรให้ถูกต้อง
+                                                    </div>
+                                                </div> 
                                             </div>
 
                                         </div>
@@ -164,6 +182,14 @@
                                                     style="font-family: 'Prompt';">
                                                 </div>
                                             </div>
+                                            <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger" role="alert"> 
+                                                <div *ngIf="email.errors.required">
+                                                    โปรดระบุ email
+                                                </div>
+                                                <div *ngIf="email.errors.pattern">
+                                                    โปรดระบุรหัสไปษณีย์ให้ถูกต้อง
+                                                </div>
+                                            </div> 
                                         </div>
                                         
                                         <div class="row" style="margin-top: 20px;font-family: 'Prompt';">
@@ -174,12 +200,17 @@
                                                     style="font-family: 'Prompt';">
                                                 </div>
                                             </div>
+                                            <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger" role="alert"> 
+                                                <div *ngIf="password.errors.required">
+                                                    โปรดระบุรหัสไปษณีย์
+                                                </div>
+                                            </div> 
                                         </div>
 
                                         <div class="row" style="margin-top: 40px;">
                                             <div class="col-md-12 d-grid">
                                                 <button type="button" class="btn btn-primary" 
-                                                (click)="signup()" data-bs-dismiss="modal">Sign
+                                                (click)="signup()" data-bs-dismiss="modal" [disabled]="profileForm.invalid">Sign
                                                     in</button>&nbsp;
                                             </div>
                                         </div>

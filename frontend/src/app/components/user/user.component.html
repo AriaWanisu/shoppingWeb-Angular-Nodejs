@@ -1,22 +1,19 @@
-<app-header></app-header>
 <div class="container-fluid">
     <div class="row">
-
         <div class="col-3">
-            <div class="card" style="margin-top: 20px;margin-left: 50px;">
-                <div class="card-body">
-                    <div class="list-group">
-                        <a href="user" class="list-group-item list-group-item-action active" aria-current="true">
-                            ข้อมูลของฉัน
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action">A second link item</a>
-                        <a href="#" class="list-group-item list-group-item-action">A third link item</a>
-                        <a href="#" class="list-group-item list-group-item-action">A fourth link item</a>
-                        <a href="#" class="list-group-item list-group-item-action disabled" tabindex="-1"
-                            aria-disabled="true">A disabled link item</a>
-                    </div>
-                </div>
-            </div>
+            <div class="card" style="margin-top: 20px;margin-left: 50px;font-family: 'Prompt';">
+    <div class="card-body">
+        <div class="list-group">
+            <a href="user" class="list-group-item list-group-item-action active" aria-current="true">
+                ข้อมูลของฉัน
+            </a>
+            <a href="user/address" class="list-group-item list-group-item-action" aria-current="true">ที่อยู่ของฉัน</a>
+            <a href="#" class="list-group-item list-group-item-action">A third link item</a>
+            <a href="#" class="list-group-item list-group-item-action">A fourth link item</a>
+            <a href="#" class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="true">A disabled link item</a>
+        </div>
+    </div>
+</div>
         </div>
 
         <div class="col-9">
@@ -53,7 +50,7 @@
                                 <tbody>
                                     <tr>
                                         <td>address:</td>
-                                        <td><b *ngIf="user.address !== null" >{{user.address.street}} {{user.address.city}} {{user.address.state}} {{user.address.country}} {{user.address.zip}}</b><b *ngIf="user.address == null">ยังไม่ได้ระบุที่อยู่</b></td>
+                                        <td><b *ngIf="user.address != null" >{{user.address.street}} {{user.address.city}} {{user.address.state}} {{user.address.country}} {{user.address.zip}}</b><b *ngIf="user.address == null">ยังไม่ได้ระบุที่อยู่</b></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -63,6 +60,10 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div class="col-md-8">
+
         </div>
 
     </div>

@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators'
 @Injectable({
   providedIn: 'root'
 })
-export class MemberService {
+export class UserService {
 
   user: string
 
@@ -14,7 +14,7 @@ export class MemberService {
   getUser(token: any,id: any){
 
     const headers = {'Authorization': token}
-    const url = 'http://localhost:3000/api/customer/';
+    const url = 'http://localhost:3000/api/user/';
 
     console.log(id)
     
@@ -27,4 +27,22 @@ export class MemberService {
       return data;
     }));
   }
+
+  addAddress(token: any,id: any,address: any){
+
+    const headers = {'Authorization': token}
+    const url = 'http://localhost:3000/user/address/';
+
+    return this.http.put<any>(url+id, address)
+      .pipe(map(data => {
+        if(data){
+          if(data.status == true){
+            console.log(data);
+          }
+        }
+        return data;
+      }))
+
+  }
+
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MemberService } from '../../services/member.service';
+import { UserService } from '../../services/user.service';
 import { LocalStorageService } from 'angular-web-storage';
 import { Router } from '@angular/router';
 
@@ -9,15 +9,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./user.component.css'],
 })
 export class UserComponent implements OnInit {
+  
   token: string;
   id: string;
   user: any;
 
-  constructor( public local: LocalStorageService,private ms: MemberService,private router: Router) {
+  constructor( public local: LocalStorageService,private us: UserService,private router: Router) {
     try {
       this.token = this.local.get('user').token;
       this.id = this.local.get('user').result.email;
-      this.ms.getUser(this.token, this.id).subscribe(
+      this.us.getUser(this.token, this.id).subscribe(
         (data) => {
           this.user = data;
         },

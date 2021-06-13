@@ -1,0 +1,157 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-3">
+            <div class="card" style="margin-top: 20px;margin-left: 50px;font-family: 'Prompt';">
+                <div class="card-body">
+                    <div class="list-group">
+                        <a href="user" class="list-group-item list-group-item-action" aria-current="true">
+                            ข้อมูลของฉัน
+                        </a>
+                        <a href="user/address" class="list-group-item list-group-item-action active" aria-current="true">ที่อยู่ของฉัน</a>
+                        <a href="#" class="list-group-item list-group-item-action">A third link item</a>
+                        <a href="#" class="list-group-item list-group-item-action">A fourth link item</a>
+                        <a href="#" class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="true">A disabled link item</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-9">
+            <div class="card" style="margin-top: 20px;margin-left: 20px;margin-right: 50px;font-family: 'Prompt'">
+                <div class="card-body">
+                    <div class="card-title" style="text-align: center;">ที่อยู่เพิ่มเติม</div>
+                    <div class="card">
+                        <div class="card-body" >
+                            <p class="btn" *ngIf="user.address == null" style="margin-top: 20px;">ยังไม่ได้ระบุที่อยู่</p><br>
+                            <button type="button" class="btn btn-primary" style="margin-left: 10px;" (click)="openAddAddress()">เพิ่มที่อยู่</button>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    
+                                </div>
+                                <div class="col-md-6" >
+                                    <div class="card" *ngIf="user.address != null">
+                                        <div class="card-body">
+                                            <p class="card-text">
+                                                {{user.firstName}} {{user.lastName}}
+                                            </p>
+                                            <p class="card-text">
+                                                {{user.address.street}} {{user.address.state}} {{user.address.city}}
+                                            </p>
+                                            <p class="card-text">
+                                                {{user.address.province}} {{user.address.country}}, {{user.address.zip}} 
+                                            </p>
+                                            <p class="card-text">
+                                                {{user.phone}}
+                                        </div>
+                                        <div class="card-footer">
+                                            <button class="pagelink" (click)="openAddAddress()"> <i class="fa fa-pencil" aria-hidden="true"></i> แก้ไขที่อยู่</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-9">
+            <div class="card" *ngIf = "addAddress" style="margin-top: 20px;margin-left: 20px;margin-right: 50px;font-family: 'Prompt';">
+                <div class="card-body">
+                    <form [formGroup]="addressForm">
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" 
+                                    placeholder="บ้านเลขที่และถนน" formControlName='street'>
+                                </div>
+                                <div *ngIf="street.invalid && (street.dirty || street.touched)" class="alert alert-danger" role="alert"> 
+                                    <div *ngIf="street.errors.required">
+                                        โปรดระบุที่อยู่
+                                    </div>
+                                </div> 
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" 
+                                    placeholder="แขวง/ตำบล" formControlName='state'>
+                                </div>
+                                <div *ngIf="state.invalid && (state.dirty || state.touched)" class="alert alert-danger" role="alert"> 
+                                    <div *ngIf="state.errors.required">
+                                        โปรดระบุแขวง/ตำบล
+                                    </div>
+                                </div> 
+                            </div>
+                            
+                            <div class="col-md-6" style="margin-top: 20px;">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" 
+                                    placeholder="เขต/อำเภอ" formControlName='city'>
+                                </div>
+                                <div *ngIf="city.invalid && (city.dirty || city.touched)" class="alert alert-danger" role="alert"> 
+                                    <div *ngIf="city.errors.required">
+                                        โปรดระบุเขต/อำเภอ
+                                    </div>
+                                </div> 
+                            </div>
+                           
+                            <div class="col-md-6" style="margin-top: 20px;">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" 
+                                    placeholder="จังหวัด" formControlName='province'>
+                                </div>
+                                <div *ngIf="province.invalid && (province.dirty || province.touched)" class="alert alert-danger" role="alert"> 
+                                    <div *ngIf="province.errors.required">
+                                        โปรดระบุจังหวัด
+                                    </div>
+                                </div> 
+                            </div>
+
+                            <div class="col-md-6" style="margin-top: 20px;">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" 
+                                    placeholder="ประเทศ" formControlName='country'>
+                                </div>
+                                <div *ngIf="country.invalid && (country.dirty || country.touched)" class="alert alert-danger" role="alert"> 
+                                    <div *ngIf="province.errors.required">
+                                        โปรดระบุประเทศ
+                                    </div>
+                                </div> 
+                            </div>
+
+                            <div class="col-md-6" style="margin-top: 20px;">
+                                <div class="form-group">
+                                    <input type="number" class="form-control" 
+                                    placeholder="รหัสไปษณีย์" formControlName='zip'>
+                                </div>
+                                <div *ngIf="zip.invalid && (zip.dirty || zip.touched)" class="alert alert-danger" role="alert"> 
+                                    <div *ngIf="zip.errors.required">
+                                        โปรดระบุรหัสไปษณีย์
+                                    </div>
+                                    <div *ngIf="zip.errors.pattern">
+                                        โปรดระบุรหัสไปษณีย์ให้ถูกต้อง
+                                    </div>
+                                </div> 
+                            </div>
+
+                            <div class="col-md-4" style="margin-top: 20px;">
+                                <button *ngIf="user.address == null" class="btn btn-primary " type="button" (click)="updateAddress()" [disabled]="addressForm.invalid">เพิ่มที่อยู่</button>
+                                <button *ngIf="user.address != null" class="btn btn-primary " type="button" (click)="updateAddress()" [disabled]="addressForm.invalid">แก้ไขที่อยู่</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

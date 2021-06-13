@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators} from '@angular/forms'
-import { AuthService } from '../../services/auth.service'
-import { Router } from '@angular/router'
-import { LocalStorageService } from 'angular-web-storage'
+import { FormControl, FormGroup, Validators} from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
+import { LocalStorageService } from 'angular-web-storage';
 
 @Component({
   selector: 'app-header',
@@ -26,10 +26,7 @@ export class HeaderComponent implements OnInit {
     sex: new FormControl('',[Validators.required]),
     email: new FormControl('',[Validators.required, Validators.email]),
     password: new FormControl('',[Validators.required, Validators.minLength(8)]),
-    phone: new FormControl('',[Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/), Validators.minLength(10), Validators.maxLength(10)]),
-    address: new FormGroup({
-     
-    })
+    phone: new FormControl('',[Validators.required, Validators.pattern(/^0[0-9]{9}/), Validators.minLength(10), Validators.maxLength(10)]),
   });
 
   constructor(public local: LocalStorageService,private auth: AuthService,private router: Router) {
@@ -77,4 +74,27 @@ export class HeaderComponent implements OnInit {
       });
   }
 
+  get firstName(){
+    return this.profileForm.get('firstName');
+  }
+
+  get lastName(){
+    return this.profileForm.get('lastName');
+  }
+
+  get sex(){
+    return this.profileForm.get('sex');
+  }
+
+  get email(){
+    return this.profileForm.get('email');
+  }
+
+  get password(){
+    return this.profileForm.get('password');
+  }
+
+  get phone(){
+    return this.profileForm.get('phone');
+  }
 }

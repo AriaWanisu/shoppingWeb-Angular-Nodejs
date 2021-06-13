@@ -1,1 +1,26 @@
 @import "https://fonts.googleapis.com/css?family=Kanit|Prompt";
+
+button.pagelink { 
+    color: #1895f5; /* โค้ดสีที่ต้องการให้เปลี่ยน */
+    text-decoration: none; 
+    border: none;
+    box-shadow: none;
+    background-color: #F7F7F7;
+    }
+
+button.pagelink:hover { 
+    color: rgba(104, 104, 104, 0.867); /* โค้ดสีที่ต้องการให้เปลี่ยน */
+    text-decoration: none; 
+    }
+
+.img-box {
+    height: 100px;
+    width: 100px;
+    position: relative;
+}
+      
+.img-responsive {
+    max-width: 100%;
+    display: block;
+    height: auto;
+}

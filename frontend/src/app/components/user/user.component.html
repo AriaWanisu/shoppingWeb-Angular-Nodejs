@@ -17,13 +17,19 @@
         </div>
 
         <div class="col-9">
-            <div class="card" style="margin-top: 20px;margin-left: 20px;margin-right: 50px;">
+            <div class="card" style="margin-top: 20px;margin-left: 20px;margin-right: 50px; border-radius: 15px;">
                 <div class="card-body">
-                    <div class="card-title" style="text-align: center;font-family: 'Prompt';">ข้อมูลส่วนตัว</div>
-                    <div class="card">
+                    <div class="card-title" style="text-align: center;font-family: 'Prompt';"><b>ข้อมูลส่วนตัว</b></div>
+                    <div class="card" style="border-radius: 15px;" *ngIf="!edit">
                         <div class="card-body" style="font-family: 'Prompt';">
                             <table class="table table-borderless">
                                 <thead>
+                                    <tr>
+                                        <td>รูป profile:</td>
+                                        <td><div *ngIf = "user.img == null" class="img-box"><img class="img-responsive" src="https://th.bing.com/th/id/OIP.tmgWGdzGFmIwg1iaqCbSvgHaHa?pid=ImgDet&rs=1"></div>
+                                            <div *ngIf = "user.img != null" class="img-box"><img class="img-responsive" src="{{user.img}}"></div>
+                                        </td>
+                                    </tr>
                                     <tr>
                                         <td>ชื่อ:</td>
                                         <td><b>{{user.firstName}} {{user.lastName}}</b></td>
@@ -54,11 +60,103 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            <p class="card-text"> </p>
-                            <p class="card-text"></p>
+                        </div>
+                        <div class="card-footer">
+                            <button class="pagelink" (click)="openEdit()"><i class="fa fa-pencil" aria-hidden="true"></i> แก้ไขข้อมูลส่วนตัว</button>
                         </div>
                     </div>
+                    <form [formGroup]="profileForm">
+                        <div class="card-body" style="font-family: 'Prompt';" *ngIf="edit">
+
+                            <!-- first row first name and last name-->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" 
+                                        formControlName='firstName' value={{profileForm.value.firstName}}>
+                                    </div>
+                                    <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="alert alert-danger" role="alert"> 
+                                        <div *ngIf="firstName.errors.required">
+                                            โปรดระบุชื่อ
+                                        </div>
+                                    </div> 
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" 
+                                        formControlName='lastName' value={{profileForm.value.lastName}}>
+                                    </div>
+                                    <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="alert alert-danger" role="alert"> 
+                                        <div *ngIf="lastName.errors.required">
+                                            โปรดระบุนามสกุล
+                                        </div>
+                                    </div> 
+                                </div>
+                            </div>
+
+                            <!-- Second row phon number -->
+                            <div class="row" style="margin-top: 20px;">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" disabled
+                                        value={{profileForm.value.email}}>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" 
+                                        formControlName='phone' value={{profileForm.value.phone}}>
+                                    </div>
+                                    <div *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="alert alert-danger" role="alert"> 
+                                        <div *ngIf="phone.errors.required">
+                                            โปรดระบุเบอร์โทร
+                                        </div>
+                                    </div> 
+                                </div>
+                            </div>
+                            
+                            <!-- Third row email disable -->
+                            <div class="row" style="margin-top: 20px;">
+                                <div class="col-md-3">
+                                    Image:
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                      <input type="file" class="form-control-file" formControlName='img' (change)="onChangeImg($event)">
+                                    </div>
+                                    <div *ngIf="img.invalid && (img.dirty || img.touched)" class="alert alert-danger" role="alert"> 
+                                        <div *ngIf="img.errors.required">
+                                            โปรดระบุเบอร์โทร
+                                        </div>
+                                    </div> 
+                                </div>
+                            </div>
+
+                            <!-- img preview-->
+                            <div class="row" style="margin-top: 30px;">
+                                <div class="col-md-3">
+
+                                </div>
+                                <div class="col-md-9">
+                                    <img *ngIf="previewLoaded" class="img-thumbnail" [src]="this.profileForm.value.img" style="height:150px;">
+                                </div>
+                            </div>
+
+
+                            <!-- button -->
+                            <div class="row" style="margin-top: 20px;">
+                                <div class="col-md-3">
+                                    <button class="btn btn-primary" type="button" (click)="updateUser()">แก้ไขข้อมูลส่วนตัว</button>
+                                    <button class="btn btn-primary" type="button" (click)="openEdit()" style="margin-left: 10px;">ยกเลิก</button>
+                                </div>
+                            </div>
+                        
+                        </div>
+                    </form>
                 </div>
+                
             </div>
         </div>
 

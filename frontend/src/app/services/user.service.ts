@@ -45,4 +45,19 @@ export class UserService {
 
   }
 
+  updateUser(id: any,userdata: any){
+
+    const url = 'http://localhost:3000/api/user/';
+
+    return this.http.put<any>(url+id, userdata)
+      .pipe(map(data => {
+        if(data){
+          if(data.status == true){
+            console.log(data);
+          }
+        }
+        return data;
+      }))
+  }
+
 }

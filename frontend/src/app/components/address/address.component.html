@@ -19,11 +19,11 @@
         <div class="col-9">
             <div class="card" style="margin-top: 20px;margin-left: 20px;margin-right: 50px;font-family: 'Prompt'">
                 <div class="card-body">
-                    <div class="card-title" style="text-align: center;">ที่อยู่เพิ่มเติม</div>
+                    <div class="card-title" style="text-align: center;"><b>ที่อยู่เพิ่มเติม</b></div>
                     <div class="card">
                         <div class="card-body" >
                             <p class="btn" *ngIf="user.address == null" style="margin-top: 20px;">ยังไม่ได้ระบุที่อยู่</p><br>
-                            <button type="button" class="btn btn-primary" style="margin-left: 10px;" (click)="openAddAddress()">เพิ่มที่อยู่</button>
+                            <button type="button" *ngIf="user.address == null" class="btn btn-primary" style="margin-left: 10px;" (click)="openAddAddress()">เพิ่มที่อยู่</button>
                             <div class="row">
                                 <div class="col-md-3">
                                     

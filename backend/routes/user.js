@@ -12,6 +12,7 @@ const userSchema = Schema({
     lastName:   String,
     sex:        String,
     phone:      String,
+    img:        String,
     address:    Schema.Types.Mixed
 },{
     collection: 'users'

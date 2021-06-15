@@ -134,7 +134,6 @@ router.route('/password/:id').put( async (req, res) => {
                     changePassword(id, hashText).then(data => {
                         console.log(data);
                         const pwdstatus = true;
-                        console.log(pwdstatus);
                         res.status(200).json({data, pwdstatus});
                     })
                     .catch(err => {

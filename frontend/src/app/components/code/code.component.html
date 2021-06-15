@@ -1,0 +1,53 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-3">
+            <div class="card" style="margin-top: 20px;margin-left: 50px;font-family: 'Prompt';">
+                <div class="card-body">
+                    <div class="list-group">
+                        <a href="user" class="list-group-item list-group-item-action" aria-current="true">
+                            ข้อมูลของฉัน
+                        </a>
+                        <a href="user/address" class="list-group-item list-group-item-action" aria-current="true">ที่อยู่ของฉัน</a>
+                        <a href="user/password" class="list-group-item list-group-item-action">เปลี่ยนรหัสผ่าน</a>
+                        <a href="user/code" class="list-group-item list-group-item-action active">โค้ดของคุณ</a>
+                        <a href="#" class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="true">A disabled link item</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-9">
+            <div class="card" style="margin-top: 20px;margin-left: 20px;margin-right: 50px;font-family: 'Prompt'">
+                <div class="card-body">
+                    <div class="card-title" style="text-align: center;"><b>โค้ดของคุณ</b></div>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="table-responsive-md">  
+                                    <table class="table table-striped table-inverse">
+                                        <thead class="thead-inverse">
+                                            <tr>
+                                                <th>Code Name</th>
+                                                <th>Code</th>
+                                                <th>ส่วนลด</th>
+                                                <th>จำนวนโค้ดที่เหลือ</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let item of code; index as i">
+                                                <td scope="row">{{item.codeName}}</td>
+                                                <td>{{item.code}}</td>
+                                                <td>{{item.discount}} บาท</td>
+                                                <td *ngIf = "item.quantity != 0">{{item.quantity}}</td>
+                                                <td *ngIf = "item.quantity == 0">โค้ดหมดแล้วจ้า</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

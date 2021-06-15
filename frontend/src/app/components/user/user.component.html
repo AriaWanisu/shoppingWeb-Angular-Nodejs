@@ -9,7 +9,7 @@
             </a>
             <a href="user/address" class="list-group-item list-group-item-action" aria-current="true">ที่อยู่ของฉัน</a>
             <a href="user/password" class="list-group-item list-group-item-action">เปลี่ยนรหัสผ่าน</a>
-            <a href="#" class="list-group-item list-group-item-action">A fourth link item</a>
+            <a href="user/code" class="list-group-item list-group-item-action">โค้ดของคุณ</a>
             <a href="#" class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="true">A disabled link item</a>
         </div>
     </div>
@@ -35,7 +35,7 @@
                                         <td><b>{{user.firstName}} {{user.lastName}}</b></td>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody>    
                                     <tr>
                                         <td>เพศ:</td>
                                         <td><b>{{user.sex}}</b></td>
@@ -53,6 +53,18 @@
                                         <td><b>{{user.phone}}</b></td>
                                     </tr>
                                 </tbody>
+                                <tbody>
+                                    <tr>
+                                        <td>ระดับสมาชิก:</td>
+                                        <td><b>{{user.tier}}</b></td>
+                                    </tr>
+                                </tbody>  
+                                <tbody>
+                                    <tr>
+                                        <td>คะแนนสะสม:</td>
+                                        <td><b>{{user.point}} คะแนน</b></td>
+                                    </tr>
+                                </tbody>  
                                 <tbody>
                                     <tr>
                                         <td>address:</td>

@@ -32,6 +32,8 @@ expressApp.use('/user', require('./routes/address'))
 expressApp.use('/login', require('./routes/signin'))
 expressApp.use('/api', require('./api/products'))
 expressApp.use('/api', require('./api/user'))
+expressApp.use('/api', require('./api/code'))
+expressApp.use('/api', require('./api/tier'))
 
 
 expressApp.listen(3000, function(){

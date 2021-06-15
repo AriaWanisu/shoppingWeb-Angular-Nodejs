@@ -14,6 +14,7 @@ import { UserComponent } from './components/user/user.component';
 import { AddressComponent } from './components/address/address.component';
 import { UserMenuComponent } from './components/user-menu/user-menu.component';
 import { PasswordComponent } from './components/password/password.component';
+import { CodeComponent } from './components/code/code.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { PasswordComponent } from './components/password/password.component';
     UserComponent,
     AddressComponent,
     UserMenuComponent,
-    PasswordComponent
+    PasswordComponent,
+    CodeComponent
   ],
   imports: [
     BrowserModule,

@@ -57,7 +57,22 @@ export class UserService {
           }
         }
         return data;
-      }))
+      }));
+  }
+
+  changePassword(id: any,pwd: any){
+
+    const url = 'http://localhost:3000/login/password/'
+
+    return this.http.put<any>(url+id, pwd)
+     .pipe(map(data => {
+       if(data){
+         if(data.status == true){
+          console.log(data);
+         }
+       }
+       return data;
+     }));
   }
 
 }

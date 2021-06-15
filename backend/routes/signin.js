@@ -23,6 +23,11 @@ try {
     User = mongoose.model('users', userSchema);
 }
 
+const makeHash = async (plainText) => {
+    const resultPromise = await bcrypt.hash(plainText, 10);
+    return resultPromise;
+}
+
 const compareHash = async (plainText, hashText) => {
     return new Promise((resolve, reject) => {
         bcrypt.compare(plainText, hashText, (err,data) => {
@@ -51,6 +56,34 @@ const findUser = (email) => {
     })
 } 
 
+const findUserPWD = (id) => {
+    return new Promise((resolve, reject) => {
+        User.findOne({_id: id}, (err,data) => {
+            if(err){
+                reject(new Error('Cannot find email!'));
+            }else{
+                if(data){
+                    resolve({id: data._id, password: data.password})
+                }else{
+                    reject(new Error('Cannot find email!'));
+                }
+            }
+        })
+    })
+} 
+
+const changePassword = (id, password) => {
+    return new Promise((resolve, reject) => {
+        User.updateOne({_id: id}, {password: password}, function(err,data) {
+            if(err){
+                reject(new err('err'))
+            }else{
+                resolve({message: 'Change password successfully!!'})
+            }
+        });
+    });
+}
+
 router.route('/signin')
     .post( async (req, res) => {
         const playload = {
@@ -78,4 +111,47 @@ router.route('/signin')
         }
     })
 
-    module.exports = router
+router.route('/password/:id').put( async (req, res) => {
+    const id = req.params.id;
+    const playload = {
+        password: req.body.password,
+        newPassword: req.body.newPassword
+    };
+
+    console.log(playload);
+
+    try{
+        const result = await findUserPWD(id);
+        const loginStatus = await compareHash(playload.password, result.password);
+
+        const status = loginStatus.status;
+
+        console.log(playload);
+
+        if(status){
+            makeHash(playload.newPassword)
+                .then(hashText => {
+                    changePassword(id, hashText).then(data => {
+                        console.log(data);
+                        const pwdstatus = true;
+                        console.log(pwdstatus);
+                        res.status(200).json({data, pwdstatus});
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        res.status(404).json(err);
+                    })
+                })
+                .catch(err => {
+                })
+        }else{
+            res.status(200).json({status});
+        }
+
+    } catch(error) {
+
+    }
+})
+
+
+module.exports = router

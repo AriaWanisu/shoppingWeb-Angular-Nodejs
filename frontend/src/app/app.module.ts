@@ -13,6 +13,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { UserComponent } from './components/user/user.component';
 import { AddressComponent } from './components/address/address.component';
 import { UserMenuComponent } from './components/user-menu/user-menu.component';
+import { PasswordComponent } from './components/password/password.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { UserMenuComponent } from './components/user-menu/user-menu.component';
     HeaderComponent,
     UserComponent,
     AddressComponent,
-    UserMenuComponent
+    UserMenuComponent,
+    PasswordComponent
   ],
   imports: [
     BrowserModule,

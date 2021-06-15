@@ -9,3 +9,9 @@ npm install bootstrap jquery popper.js
 
 npm install angular-web-storage --save
 ```
+
+# Installation Node_Module for backend
+
+```
+npm i mongoose-unique-validator
+```

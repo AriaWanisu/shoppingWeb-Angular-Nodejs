@@ -35,6 +35,8 @@ expressApp.use('/api', require('./api/user'))
 expressApp.use('/api', require('./api/code'))
 expressApp.use('/api', require('./api/tier'))
 expressApp.use('/api', require('./api/cart'))
+expressApp.use('/api', require('./api/transport'))
+expressApp.use('/api', require('./api/paid'))
 
 expressApp.listen(3000, function(){
     console.log('Listening on port 3000');

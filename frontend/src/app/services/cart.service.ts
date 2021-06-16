@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ProductService } from './product.service'
 import { HttpClient } from '@angular/common/http'
 import { map } from 'rxjs/operators'
+import { LocalStorageService } from 'angular-web-storage'
 
 @Injectable({
   providedIn: 'root'
@@ -14,14 +15,18 @@ export class CartService {
   cart: any;
   body: any;
 
-  constructor(private http: HttpClient, private productService: ProductService) { }
+  constructor(private http: HttpClient, private productService: ProductService, public local: LocalStorageService) { }
 
   add(uid: String,cartData: any){
     console.log("add cart Work")
     return this.http.post<any>('http://localhost:3000/api/carts/'+uid, cartData)
      .pipe(map(data => {
        if(data){
+         this.sumPrice = this.local.get('sumPrice')
          this.sumPrice += cartData.price;
+         this.local.set('sumPrice', this.sumPrice, 1, 'w');
+         console.log("sumPrice "+ this.sumPrice)
+         console.log("local " + this.local.get('sumPrice'))
        }
        return data;
      }));
@@ -55,9 +60,12 @@ export class CartService {
 
   inPro(product: any){
     console.log("inPro Work!!")
+    this.sumPrice = this.local.get('sumPrice')
+    this.sumPrice -= product.price;
+    this.local.set('sumPrice', this.sumPrice, 1, 'w');
     return this.http.put<any>('http://localhost:3000/api/updateproducts', product)
     .pipe(map(data => {
-      return data;
+      console.log(data)
     }))
   }
 
@@ -66,7 +74,7 @@ export class CartService {
   }
 
   getsumPrice(){
-    return this.sumPrice;
+    return this.local.get('sumPrice');
   }
 
 }

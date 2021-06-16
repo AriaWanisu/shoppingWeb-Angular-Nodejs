@@ -13,7 +13,9 @@ const userSchema = Schema({
     sex:        String,
     phone:      String,
     img:        String,
-    address:    Schema.Types.Mixed
+    address:    Schema.Types.Mixed,
+    tier:       String,
+    point:      Number
 },{
     collection: 'users'
 });
@@ -40,7 +42,9 @@ const insertUser = (dataUser) => {
             lastName: dataUser.lastName,
             sex: dataUser.sex,
             phone: dataUser.phone,
-            address: dataUser.address
+            address: dataUser.address,
+            tier: "Newbie Tier",
+            point: 0
         });
         new_user.save((err, data) => {
             if(err){

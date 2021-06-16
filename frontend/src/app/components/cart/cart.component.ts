@@ -7,13 +7,16 @@ import { CartService } from '../../services/cart.service';
 import { ProductService } from '../../services/product.service';
 import { TransportService } from '../../services/transport.service'
 import { CodeService } from '../../services/code.service';
+import { TierService } from '../../services/tier.service';
+import { UserService } from '../../services/user.service';
+import { PaidService } from '../../services/paid.service';
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  selector: 'app-cart',
+  templateUrl: './cart.component.html',
+  styleUrls: ['./cart.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class CartComponent implements OnInit {
 
   cart: any;
 
@@ -23,67 +26,21 @@ export class HeaderComponent implements OnInit {
   item: any;
   transport: any;
   sumPrice: number = 0;
+  user: any;
   code = new FormControl('');
-  getCode: boolean = false;
+  getCode: boolean;
   codeDiscount: any;
+  tier: any;
+  id: any;
 
-  authForm = new FormGroup({
-    email: new FormControl(''),
-    password: new FormControl(''),
-  });
-
-  profileForm = new FormGroup({
-    firstName: new FormControl('',[Validators.required]),
-    lastName: new FormControl('',[Validators.required]),
-    sex: new FormControl('',[Validators.required]),
-    email: new FormControl('',[Validators.required, Validators.email]),
-    password: new FormControl('',[Validators.required, Validators.minLength(8)]),
-    phone: new FormControl('',[Validators.required, Validators.pattern(/^0[0-9]{9}/), Validators.minLength(10), Validators.maxLength(10)]),
-  });
-
-  constructor(public local: LocalStorageService,private auth: AuthService,private router: Router, private cs: CartService,private ps: ProductService, private ts: TransportService, private codes: CodeService) {
-    
+  constructor(public local: LocalStorageService,private auth: AuthService,private router: Router, private cs: CartService,private ps: ProductService, private ts: TransportService, private codes: CodeService,private tiers: TierService, private us: UserService,private paidservices: PaidService) {
+    this.getUser();
+    this.getCart();
+    this.getTransport();
+    this.getCode = false;
   }
 
   ngOnInit(): void {
-  }
-
-  signin(){
-    console.log(this.authForm.value);
-    this.auth.signIn(this.authForm.value).subscribe(
-      data => {
-        if(data.status == true){
-          this.router.navigate(['/home'])
-          this.name = this.local.get('user').result.username;
-        }else{
-          alert('Username or Password is incorrect!');
-        }
-      },
-      err => {
-        console.log(err);
-        alert('Username or Password is incorrect!');
-      });
-      
-  }
-
-  signout(){
-    this.local.clear();
-  }
-
-  signup(){
-    console.log(this.profileForm.value);
-    this.auth.signUp(this.profileForm.value).subscribe(
-      data => {
-        alert('ลงทะเบียนสำเร็จ!!')
-      },
-      err => {
-        console.log(err);
-        alert('Username or Password is incorrect!');
-      });
-  }
-
-  toCart(){
-    this.router.navigate(['/cart'])
   }
 
   getCounter(){
@@ -94,28 +51,31 @@ export class HeaderComponent implements OnInit {
     return this.cs.getsumPrice();
   }
 
-  get firstName(){
-    return this.profileForm.get('firstName');
+  getUser(){
+    this.token = this.local.get('user').token;
+      this.id = this.local.get('user').result.email;
+      this.us.getUser(this.token, this.id).subscribe(
+        (data) => {
+          this.user = data;
+          this.getUserTier();
+        },
+        (err) => {
+          this.router.navigate(['/']);
+        })
   }
 
-  get lastName(){
-    return this.profileForm.get('lastName');
-  }
-
-  get sex(){
-    return this.profileForm.get('sex');
-  }
-
-  get email(){
-    return this.profileForm.get('email');
-  }
-
-  get password(){
-    return this.profileForm.get('password');
-  }
-
-  get phone(){
-    return this.profileForm.get('phone');
+  getUserTier(){
+    this.tiers.getTier(this.user.tier).subscribe(
+      (data) => {
+        this.tier = data
+        if(this.local.get('count') == null || this.local.get('count') == 0){
+          this.sumPrice = this.local.get('sumPrice')
+          this.sumPrice -= this.tier.special
+          this.local.set('sumPrice', this.sumPrice, 1, 'w');
+          this.local.set('count', 1, 1, 'w');
+        }
+      }
+    )
   }
 
   getCart(){
@@ -170,6 +130,31 @@ export class HeaderComponent implements OnInit {
     )
   }
 
+  paidCart(user: any){
+    console.log("------------------------------");
+    console.log(user);
+    this.paidservices.paid(user).subscribe(
+      (data) => {
+        console.log("paid Work")
+        this.paidservices.upgradeUser(user).subscribe(
+          (data) => {
+            console.log("upgrade work");
+            alert("ชำระเงินเสร็จสิ้น")
+            this.local.set('sumPrice',0,1,'w')
+            this.local.set('count',0,1,'w')
+            window.location.reload()
+          },
+          (err) => {
+    
+          }
+        )
+      },
+      (err) => {
+
+      }
+    )
+  }
+
   getTransport(){
     console.log('work')
     try{
@@ -186,9 +171,21 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  selectTrasprot(transport: any){
+  selectTrasprot(transportprice: any){
     console.log("select");
-    console.log(transport)
+    console.log(transportprice)
+    if(this.local.get('checkTrasport') == null){
+      this.local.set('checkTrasport', transportprice,1,'w');
+      this.sumPrice = this.local.get('sumPrice')
+      this.sumPrice += transportprice
+      this.local.set('sumPrice', this.sumPrice, 1, 'w');
+    }else{
+      this.sumPrice = this.local.get('sumPrice')
+      this.sumPrice -= this.local.get('checkTrasport')
+      this.sumPrice += transportprice
+      this.local.set('sumPrice', this.sumPrice, 1, 'w');
+      this.local.set('checkTrasport', transportprice,1,'w');
+    }
   }
 
   use(){
@@ -197,7 +194,7 @@ export class HeaderComponent implements OnInit {
       this.codes.useCode(this.code.value).subscribe(
         data=>{
           this.codeDiscount = data
-          this.getCode = true;
+          this.local.set('usedCode', true, 1, 'w');
           this.sumPrice = this.local.get('sumPrice')
           this.sumPrice -= this.codeDiscount.discount;
           this.local.set('sumPrice', this.sumPrice, 1, 'w');

@@ -25,7 +25,7 @@
                     <li><a class="dropdown-item" href="#">Our Team</a></li>
                     <li><a class="dropdown-item" href="#" (click)="signout()">Sign Out</a></li>
                 </ul>
-                <button class="btn btn-primary" type="button" (click)="getCart()" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" style="background-color: #1895f5;border-color: #1895f5;margin-left: 20px;"><i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
+                <button class="btn btn-primary" type="button" (click)="toCart()" style="background-color: #1895f5;border-color: #1895f5;margin-left: 20px;"><i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
             </div>
             <!-- Button trigger modal -->
             <button *ngIf="local.get('user') === null" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -203,7 +203,7 @@
                                             </div>
                                             <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger" role="alert"> 
                                                 <div *ngIf="password.errors.required">
-                                                    โปรดระบุรหัสไปษณีย์
+                                                    โปรดระบุพาสเวิร์ด
                                                 </div>
                                             </div> 
                                         </div>
@@ -223,41 +223,8 @@
                     </div>
                 </div>
                 <!-- Modal footer -->
-
-            </div>
         </div>
     </div>
+</div>
 
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" style="width: 700px;font-family: 'Prompt';">
-        <div class="offcanvas-header">
-          <h5 id="offcanvasRightLabel" style="margin-top: 20px;">ตระกล้าสินค้า</h5>
-          <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-          
-        </div><hr>
-        <div class="offcanvas-body">
-            <div class="modal-body">
-                <table class="table table-striped table-inverse" style="margin-top: -45px;">
-                    <thead class="thead-inverse">
-                        <tr>
-                            <th>ID.</th>
-                            <th>Name</th>
-                            <th>Price</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let item of cart; index as i">
-                            <td scope="row"><img src="{{item.img}}" style="width: 100px;height: 100px;"></td>
-                            <td>{{item.name}}</td>
-                            <td>{{item.price}}</td>
-                            <td><button type="button" class="btn btn-danger" (click)="delete(item._id,item.pid)"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
-                        </tr>
-                    </tbody>
-                </table>
 
-                <p class="text-right">
-                    <b>Subtotal: </b> {{getSumPrice()}}
-                </p>
-            </div>
-        </div>
-      </div>

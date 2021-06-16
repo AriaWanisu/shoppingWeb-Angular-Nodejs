@@ -47,7 +47,7 @@ const findUser = (email) => {
                 reject(new Error('Cannot find email!'));
             }else{
                 if(data){
-                    resolve({id: data._id, email: data.email, password: data.password, firstName: data.firstName, lastName: data.lastName})
+                    resolve({id: data._id, email: data.email, password: data.password, firstName: data.firstName, lastName: data.lastName, tier: data.tier, point: data.point})
                 }else{
                     reject(new Error('Cannot find email!'));
                 }

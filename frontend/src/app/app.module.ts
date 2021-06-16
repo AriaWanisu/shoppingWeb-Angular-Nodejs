@@ -15,6 +15,7 @@ import { AddressComponent } from './components/address/address.component';
 import { UserMenuComponent } from './components/user-menu/user-menu.component';
 import { PasswordComponent } from './components/password/password.component';
 import { CodeComponent } from './components/code/code.component';
+import { CartComponent } from './components/cart/cart.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { CodeComponent } from './components/code/code.component';
     AddressComponent,
     UserMenuComponent,
     PasswordComponent,
-    CodeComponent
+    CodeComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,

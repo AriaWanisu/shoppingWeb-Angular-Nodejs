@@ -37,8 +37,38 @@ const getTier = () => {
     })
 }
 
+
+const getSomeTier = (tier) => {
+    return new Promise((resolve,reject) => {
+        Tier.findOne({tierName: tier}, (err,data) =>{
+            if(err){
+                reject(new Error('err'));
+            }else{
+                if(data){
+                    resolve(data)
+                }else{
+                    reject(new Error('Cannot get Tier!'));
+                }
+            }
+        })
+    })
+}
+
 router.route('/tier').get((req, res) => {
+    console.log("getTier")
     getTier().then(result => {
+        console.log(result);
+        res.status(200).json(result);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(404).json(err);
+    })
+})
+
+router.route('/tier/:tier').get((req, res) => {
+    const tier = req.params.tier;
+    getSomeTier(tier).then(result => {
         console.log(result);
         res.status(200).json(result);
     })

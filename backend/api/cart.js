@@ -168,7 +168,6 @@ router.route('/cart/:cid').delete((req,res) => {
 
 router.route('/updateproducts').put((req,res) => {
     console.log("updateproduct Work")
-    
     const playload = {
         pid: req.body._id,
         quantity: req.body.quantity

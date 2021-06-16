@@ -14,7 +14,9 @@ const userSchema = Schema({
     sex:        String,
     phone:      String,
     img:        String,
-    address:    Schema.Types.Mixed
+    address:    Schema.Types.Mixed,
+    tier:       String,
+    point:      Number
 },{
     collection: 'users'
 });

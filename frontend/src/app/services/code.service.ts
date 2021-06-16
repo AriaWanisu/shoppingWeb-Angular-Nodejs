@@ -21,4 +21,14 @@ export class CodeService {
         return this.code;
       }))
   }
+
+  useCode(code: string){
+    return this.http.get<any>('http://localhost:3000/api/code/'+code)
+      .pipe(map(data => {
+        if(data){
+          console.log(data);
+        }
+        return data;
+      }))
+  }
 }

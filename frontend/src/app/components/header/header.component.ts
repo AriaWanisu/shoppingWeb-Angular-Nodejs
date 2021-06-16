@@ -3,6 +3,8 @@ import { FormControl, FormGroup, Validators} from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { LocalStorageService } from 'angular-web-storage';
+import { CartService } from '../../services/cart.service';
+import { ProductService } from '../../services/product.service';
 
 @Component({
   selector: 'app-header',
@@ -11,9 +13,12 @@ import { LocalStorageService } from 'angular-web-storage';
 })
 export class HeaderComponent implements OnInit {
 
+  cart: any;
+
   token: string;
   singend: number;
   name: string;
+  item: any;
 
   authForm = new FormGroup({
     email: new FormControl(''),
@@ -29,13 +34,9 @@ export class HeaderComponent implements OnInit {
     phone: new FormControl('',[Validators.required, Validators.pattern(/^0[0-9]{9}/), Validators.minLength(10), Validators.maxLength(10)]),
   });
 
-  constructor(public local: LocalStorageService,private auth: AuthService,private router: Router) {
-    if(local.get('user') == null){
-      this.singend = 0;
-    }else{
-      this.singend = 1;
-    }
-   }
+  constructor(public local: LocalStorageService,private auth: AuthService,private router: Router, private cs: CartService,private ps: ProductService) {
+    
+  }
 
   ngOnInit(): void {
   }
@@ -74,6 +75,14 @@ export class HeaderComponent implements OnInit {
       });
   }
 
+  getCounter(){
+    return this.cs.getCounter();
+  }
+
+  getSumPrice(){
+    return this.cs.getsumPrice();
+  }
+
   get firstName(){
     return this.profileForm.get('firstName');
   }
@@ -97,4 +106,45 @@ export class HeaderComponent implements OnInit {
   get phone(){
     return this.profileForm.get('phone');
   }
+
+  getCart(){
+    const uid = this.local.get('user').result.id
+    this.cart = this.cs.getCart(uid).subscribe(
+      (data) => {
+        this.cart = data;
+        console.log(data);
+      },
+      (err) => {
+        this.router.navigate(['/']);
+      }
+    );
+  }
+
+  delete(cid: string, pid: string){
+    this.ps.getSomeProduct(pid).subscribe(
+      (data) => {
+        console.log("Delete Work")
+        console.log(data);
+        this.cs.deleteCart(cid).subscribe(
+          (result) => {
+            this.cs.inPro(data).subscribe(
+              (data) => {
+                alert("ลบสินค้าออกจากตระกล้า")
+              }
+            ),
+            (err) => {
+
+            }
+          },
+          (err) => {
+           
+          }
+        );
+      },
+      (err) => {
+
+      }
+    )
+  }
+
 }

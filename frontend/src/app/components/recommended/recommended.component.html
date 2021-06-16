@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card" style="font-family: 'Prompt';">
         
     <div class="card-body">
         <div>
@@ -8,32 +8,62 @@
                 <div class="carousel-inner">
 
                     <!-- carousel page 1-->
-                    <div class="carousel-item active">
+                    <div class="carousel-item active" >
                         <div class="row">
-                            <div class="col-sm-3">
+                            <div class="col-md-3">
                                 <div class="thumb-wrapper">
-                                    <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
                                     <div class="img-box">
-                                        <img src="https://phoenixnext.com/img/310/300/resize/4/2/42694039_1082090741953744_8359255987340705792_n_1.jpg" class="img-responsive" alt="">
+                                        <img src="{{product[0].img}}" class="img-responsive" alt="">
                                     </div>
                                     <div class="thumb-content">
-                                        <h4>Product 1</h4>
+                                        <h4>{{product[0].name}}</h4>
                                     </div>
-                                    <p class="item-price"><b>฿200.00</b></p>
-                                    <a href="#" class="btn btn-primary">Add to Cart</a>
+                                    <p class="item-price"><b>{{product[0].price}} บาท</b></p>
+                                    <a (click)="getSomeProduct(product[0]._id)"class="btn btn-primary">Add to Cart</a>
                                 </div>
-                                <div class="col-sm-3">
-
-                                </div>
-
-                                <div class="col-sm-3">
-                                </div>
-
-                                <div class="col-sm-3">
-
-                                </div>
-
                             </div>
+
+                                <div class="col-md-3">
+                                    <div class="thumb-wrapper">
+                                        <div class="img-box">
+                                            <img src="{{product[1].img}}" class="img-responsive" alt="" style="height: 100%;margin-left: 20px;">
+                                        </div>
+                                        <div class="thumb-content">
+                                            <h4>{{product[1].name}}</h4>
+                                        </div>
+                                        <p class="item-price"><b>{{product[1].price}} บาท</b></p>
+                                        <a (click)="getSomeProduct(product[1]._id)"class="btn btn-primary">Add to Cart</a>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="thumb-wrapper">
+                                        <div class="img-box">
+                                            <img src="{{product[2].img}}" class="img-responsive" alt="" >
+                                        </div>
+                                        <div class="thumb-content">
+                                            <h4>{{product[2].name}}</h4>
+                                        </div>
+                                        <p class="item-price"><b>{{product[2].price}} บาท</b></p>
+                                        <a (click)="getSomeProduct(product[2]._id)" class="btn btn-primary">Add to Cart</a>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="thumb-wrapper">
+                                        <div class="img-box">
+                                            <img src="{{product[3].img}}" class="img-responsive" alt="">
+                                        </div>
+                                        <div class="thumb-content">
+                                            <h4>{{product[3].name}}</h4>
+                                        </div>
+                                        <p class="item-price"><b>{{product[4].price}} บาท</b></p>
+                                        <a (click)="getSomeProduct(product[3]._id)" class="btn btn-primary">Add to Cart</a>
+                                    </div>
+                                </div>
+
+                            
                         </div>
                     </div>
 
@@ -42,18 +72,28 @@
                         <div class="row">
                             <div class="col-sm-3">
                                 <div class="thumb-wrapper">
-                                    <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
                                     <div class="img-box">
-                                        <img src="https://www.tutorialrepublic.com/examples/images/products/macbook-air.jpg" class="img-responsive" alt="">
+                                        <img src="{{product[4].img}}" class="img-responsive" alt="">
                                     </div>
                                     <div class="thumb-content">
-                                        <h4>Apple iPad</h4>
+                                        <h4>{{product[4].name}}</h4>
                                     </div>
-                                    <p class="item-price"><b>$369.00</b></p>
-                                    <a href="#" class="btn btn-primary">Add to Cart</a>
+                                    <p class="item-price"><b>{{product[4].price}} บาท</b></p>
+                                    <a (click)="getSomeProduct(product[4]._id)" class="btn btn-primary">Add to Cart</a>
                                 </div>
-                                <div class="col-sm-3">
+                            </div>
 
+                                <div class="col-sm-3">
+                                    <div class="thumb-wrapper">
+                                        <div class="img-box">
+                                            <img src="" class="img-responsive" alt="">
+                                        </div>
+                                        <div class="thumb-content">
+                                            <h4></h4>
+                                        </div>
+                                        <p class="item-price"><b> บาท</b></p>
+                                        <a (click)="getSomeProduct(product[5]._id)" class="btn btn-primary">Add to Cart</a>
+                                    </div>
                                 </div>
 
                                 <div class="col-sm-3">
@@ -65,7 +105,6 @@
 
                             </div>
                         </div>
-                    </div>
                 </div>
 
                 <!-- carousal Control -->

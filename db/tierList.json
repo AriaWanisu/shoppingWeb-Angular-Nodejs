@@ -1,0 +1,22 @@
+[{
+  "_id": {
+    "$oid": "60c8562d58543748709282d4"
+  },
+  "tierName": "God Tier",
+  "condition": 1000000,
+  "special": 100
+},{
+  "_id": {
+    "$oid": "60c8564558543748709282d5"
+  },
+  "tierName": "Normal Tier",
+  "condition": 2000,
+  "special": 10
+},{
+  "_id": {
+    "$oid": "60c8566258543748709282d6"
+  },
+  "tierName": "Newbie Tier",
+  "condition": 0,
+  "special": 0
+}]

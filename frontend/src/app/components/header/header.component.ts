@@ -21,11 +21,6 @@ export class HeaderComponent implements OnInit {
   singend: number;
   name: string;
   item: any;
-  transport: any;
-  sumPrice: number = 0;
-  code = new FormControl('');
-  getCode: boolean = false;
-  codeDiscount: any;
 
   authForm = new FormGroup({
     email: new FormControl(''),
@@ -116,97 +111,6 @@ export class HeaderComponent implements OnInit {
 
   get phone(){
     return this.profileForm.get('phone');
-  }
-
-  getCart(){
-    var i;
-    this.getTransport()
-    const uid = this.local.get('user').result.id
-    this.cart = this.cs.getCart(uid).subscribe(
-      (data) => {
-        this.cart = data;
-        console.log(this.cart);
-        if(this.local.get('sumPrice') == null){
-          for (i = 0; i < data.length; i++) {
-            console.log("if work");
-            this.sumPrice = this.local.get('sumPrice')
-            this.sumPrice += this.cart[i].price;
-            this.local.set('sumPrice', this.sumPrice, 1, 'w');
-          }
-        }
-        
-      },
-      (err) => {
-        this.router.navigate(['/']);
-      }
-    );
-  }
-
-  delete(cid: string, pid: string){
-    this.ps.getSomeProduct(pid).subscribe(
-      (data) => {
-        console.log("Delete Work")
-        console.log(data);
-        this.cs.deleteCart(cid).subscribe(
-          (result) => {
-            this.cs.inPro(data).subscribe(
-              (data) => {
-                alert("ลบสินค้าออกจากตระกล้า")
-                this.getCart();
-              }
-            ),
-            (err) => {
-
-            }
-          },
-          (err) => {
-           
-          }
-        );
-      },
-      (err) => {
-
-      }
-    )
-  }
-
-  getTransport(){
-    console.log('work')
-    try{
-      this.ts.getTransport().subscribe(
-        data => {
-          this.transport = data;
-          console.log(this.transport)
-        },
-        err => {
-          console.log(err)
-        });
-    }catch(error){
-      console.log(error)
-    }
-  }
-
-  selectTrasprot(transport: any){
-    console.log("select");
-    console.log(transport)
-  }
-
-  use(){
-    console.log(this.code.value);
-    if(this.code.value != ""){
-      this.codes.useCode(this.code.value).subscribe(
-        data=>{
-          this.codeDiscount = data
-          this.getCode = true;
-          this.sumPrice = this.local.get('sumPrice')
-          this.sumPrice -= this.codeDiscount.discount;
-          this.local.set('sumPrice', this.sumPrice, 1, 'w');
-        },
-        err => {
-          alert("โค้ดหมดแล้ว")
-        })
-    }
-    
   }
 
 }

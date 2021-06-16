@@ -1,0 +1,17 @@
+[{
+  "_id": {
+    "$oid": "60c84d7758543748709282d2"
+  },
+  "codeName": "ส่วนลด 50 บาท",
+  "code": "ABCD",
+  "discount": 50,
+  "quantity": 4
+},{
+  "_id": {
+    "$oid": "60c84da458543748709282d3"
+  },
+  "codeName": "ส่วนลด 100 บาท",
+  "code": "AAA",
+  "discount": 100,
+  "quantity": 2
+}]

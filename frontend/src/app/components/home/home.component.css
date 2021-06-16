@@ -1,0 +1,14 @@
+.img-box {
+    height: 120px;
+    margin-bottom: 20px;
+    width: 100%;
+    position: relative;
+  }
+  
+  .img-responsive {
+    max-width: 100%;
+    display: block;
+    height: auto;
+  }
+  
+  

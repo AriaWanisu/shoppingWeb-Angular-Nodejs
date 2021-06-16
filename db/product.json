@@ -1,0 +1,73 @@
+[{
+  "_id": {
+    "$oid": "60c8699f6513ce0528d7168d"
+  },
+  "name": "เกมเศรษฐี",
+  "price": 99,
+  "quantity": 6,
+  "category": "บอร์ดเกม",
+  "img": "https://us-fbcloud.net/wb/data/491/491404-topic-ix-10.jpg"
+},{
+  "_id": {
+    "$oid": "60c869da6513ce0528d7168e"
+  },
+  "name": "Coup",
+  "price": 299,
+  "quantity": 1,
+  "category": "บอร์ดเกม",
+  "img": "https://th.bing.com/th/id/OIP.5HzMOzvPBU3iED_SNpkTqwHaHa?pid=ImgDet&rs=1"
+},{
+  "_id": {
+    "$oid": "60c86af56513ce0528d7168f"
+  },
+  "name": "รถบังคับวิทยุ",
+  "price": 599,
+  "quantity": 52,
+  "category": "รถยนต์",
+  "img": "https://inclinehs.org/wp-content/uploads/2019/07/%E0%B8%82%E0%B8%AD%E0%B8%87%E0%B9%80%E0%B8%A5%E0%B9%88%E0%B8%99-%E0%B8%A7%E0%B8%B1%E0%B8%A2%E0%B9%80%E0%B8%94%E0%B9%87%E0%B8%81-%E0%B8%A2%E0%B8%B8%E0%B8%84-90.jpg"
+},{
+  "_id": {
+    "$oid": "60c86b556513ce0528d71690"
+  },
+  "name": "เลโก้",
+  "price": 1500,
+  "quantity": 995,
+  "category": "เสริมจิตนการ",
+  "img": "https://static1.srcdn.com/wordpress/wp-content/uploads/2020/09/lego1.png"
+},{
+  "_id": {
+    "$oid": "60c86b7a6513ce0528d71691"
+  },
+  "name": "จิ๊กซอ",
+  "price": 299,
+  "quantity": 331,
+  "category": "เสริมจิตนการ",
+  "img": "https://puzzlepalace.com.au/wp-content/uploads/2018/04/The-Delivery-Round-500-Piece-Jigsaw-Puzzle.jpg"
+},{
+  "_id": {
+    "$oid": "60ca055d9f237377f0a19c0a"
+  },
+  "name": "Inosuke",
+  "price": 1960,
+  "quantity": 8,
+  "category": "nendoroid",
+  "img": "https://animatebkk-online.com/wp-content/uploads/2020/06/4580590121409.jpg"
+},{
+  "_id": {
+    "$oid": "60ca05789f237377f0a19c0b"
+  },
+  "name": "Kokkoro",
+  "price": 2050,
+  "quantity": 9,
+  "category": "nendoroid",
+  "img": "https://animatebkk-online.com/wp-content/uploads/2021/06/4580590125018-3.jpg"
+},{
+  "_id": {
+    "$oid": "60ca05fe9f237377f0a19c0e"
+  },
+  "name": "Amiya",
+  "price": 2130,
+  "quantity": 3,
+  "category": "nendoroid",
+  "img": "https://animatebkk-online.com/wp-content/uploads/2021/05/4580590124981-1.jpg"
+}]

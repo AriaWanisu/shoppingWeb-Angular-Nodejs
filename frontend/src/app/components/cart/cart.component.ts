@@ -21,14 +21,12 @@ export class CartComponent implements OnInit {
   cart: any;
 
   token: string;
-  singend: number;
   name: string;
   item: any;
   transport: any;
   sumPrice: number = 0;
   user: any;
   code = new FormControl('');
-  getCode: boolean;
   codeDiscount: any;
   tier: any;
   id: any;
@@ -37,14 +35,10 @@ export class CartComponent implements OnInit {
     this.getUser();
     this.getCart();
     this.getTransport();
-    this.getCode = false;
+    this.local.set("select",-1,1,'w')
   }
 
   ngOnInit(): void {
-  }
-
-  getCounter(){
-    return this.cs.getCounter();
   }
 
   getSumPrice(){
@@ -142,6 +136,8 @@ export class CartComponent implements OnInit {
             alert("ชำระเงินเสร็จสิ้น")
             this.local.set('sumPrice',0,1,'w')
             this.local.set('count',0,1,'w')
+            this.local.set('counter',0,1,'w');
+            this.local.set('usedCode', false, 1, 'w');
             window.location.reload()
           },
           (err) => {
@@ -172,17 +168,25 @@ export class CartComponent implements OnInit {
   }
 
   selectTrasprot(transportprice: any){
-    console.log("select");
+    
     console.log(transportprice)
-    if(this.local.get('checkTrasport') == null){
+    if(this.local.get('checkTrasport') == null || this.local.get('checkTrasport') == 0){
+      console.log("select 1");
+      this.local.set("select",1,1,'w')
       this.local.set('checkTrasport', transportprice,1,'w');
       this.sumPrice = this.local.get('sumPrice')
       this.sumPrice += transportprice
       this.local.set('sumPrice', this.sumPrice, 1, 'w');
     }else{
+      console.log("select 2");
+      this.local.set("select",1,1,'w')
       this.sumPrice = this.local.get('sumPrice')
+      console.log(this.sumPrice)
       this.sumPrice -= this.local.get('checkTrasport')
+      console.log(this.sumPrice);
       this.sumPrice += transportprice
+      console.log(this.sumPrice);
+      
       this.local.set('sumPrice', this.sumPrice, 1, 'w');
       this.local.set('checkTrasport', transportprice,1,'w');
     }

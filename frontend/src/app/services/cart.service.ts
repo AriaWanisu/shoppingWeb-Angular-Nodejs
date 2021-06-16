@@ -10,12 +10,14 @@ import { LocalStorageService } from 'angular-web-storage'
 export class CartService {
 
   product: any;
-  counter: number = 0;
+  counter: number;
   sumPrice: number = 0;
   cart: any;
   body: any;
 
-  constructor(private http: HttpClient, private productService: ProductService, public local: LocalStorageService) { }
+  constructor(private http: HttpClient, public local: LocalStorageService) { 
+    this.counter = this.local.get('counter');
+  }
 
   add(uid: String,cartData: any){
     console.log("add cart Work")
@@ -27,6 +29,9 @@ export class CartService {
          this.local.set('sumPrice', this.sumPrice, 1, 'w');
          console.log("sumPrice "+ this.sumPrice)
          console.log("local " + this.local.get('sumPrice'))
+         this.counter = this.local.get('counter');
+         this.counter += 1;
+         this.local.set('counter',this.counter,1,'w');
        }
        return data;
      }));
@@ -54,6 +59,9 @@ export class CartService {
     return this.http.delete<any>(url+cid)
       .pipe(map(data => {
         if(data){
+          this.counter = this.local.get('counter');
+          this.counter -= 1;
+          this.local.set('counter',this.counter,1,'w');
         }
       }));
   }
@@ -70,7 +78,7 @@ export class CartService {
   }
 
   getCounter(){
-    return this.counter;
+    return this.local.get('counter');
   }
 
   getsumPrice(){

@@ -89,22 +89,22 @@
                     </div>
                     <div class="col-3">
                         <button type="button" class="btn btn-primary" (click)="use()"
-                            [disabled]="this.local.get('usedCode') != null">ใส่โค้ดส่วนลด</button>
+                            [disabled]="this.local.get('usedCode') != null ">ใส่โค้ดส่วนลด</button>
                     </div>
                 </div>
-                <p class="text-right" style="margin-top: 20px;" *ngIf="getCode">
+                <p class="text-right" style="margin-top: 20px;" *ngIf="this.local.get('usedCode') == true">
                     <b>ได้รับส่วนลดจากโค้ด: </b> {{codeDiscount.discount}} บาท
                 </p>
 
                 <p class="text-right" style="margin-top: 20px;" *ngIf="this.local.get('sumPrice') <= 0">
-                    <b>ราคาสุธิ: </b> 0 บาท
+                    <b>ราคาสุทธิ: </b> 0 บาท
                 </p>
                 <p class="text-right" style="margin-top: 20px;" *ngIf="this.local.get('sumPrice') > 0">
-                    <b>ราคาสุธิ: </b> {{getSumPrice()}} บาท
+                    <b>ราคาสุทธิ: </b> {{getSumPrice()}} บาท
                 </p>
 
             </div>
-            <div class="card-footer"><button type="button" class="btn btn-danger" (click)="paidCart(user)">ชำระเงิน</button></div>
+            <div class="card-footer"><button type="button" class="btn btn-danger" (click)="paidCart(user)" [disabled]="local.get('select') == -1">ชำระเงิน</button></div>
         </div>
     </div>
 

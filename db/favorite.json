@@ -1,0 +1,12 @@
+[{
+  "_id": {
+    "$oid": "60ca0da9eb83db6730ee2ff7"
+  },
+  "pid": "60c86b7a6513ce0528d71691",
+  "name": "จิ๊กซอ",
+  "price": 299,
+  "category": "เสริมจิตนการ",
+  "img": "https://puzzlepalace.com.au/wp-content/uploads/2018/04/The-Delivery-Round-500-Piece-Jigsaw-Puzzle.jpg",
+  "user": "60c4e7efe20b1828b0df1627",
+  "__v": 0
+}]

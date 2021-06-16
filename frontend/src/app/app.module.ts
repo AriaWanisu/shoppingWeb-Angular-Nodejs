@@ -16,6 +16,7 @@ import { UserMenuComponent } from './components/user-menu/user-menu.component';
 import { PasswordComponent } from './components/password/password.component';
 import { CodeComponent } from './components/code/code.component';
 import { CartComponent } from './components/cart/cart.component';
+import { FavoriteComponent } from './components/favorite/favorite.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { CartComponent } from './components/cart/cart.component';
     UserMenuComponent,
     PasswordComponent,
     CodeComponent,
-    CartComponent
+    CartComponent,
+    FavoriteComponent
   ],
   imports: [
     BrowserModule,

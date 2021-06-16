@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { CartService } from '../../services/cart.service';
 import { LocalStorageService } from 'angular-web-storage';
+import { FavoriteService } from '../../services/favorite.service';
 
 @Component({
   selector: 'app-recommended',
@@ -14,7 +15,7 @@ export class RecommendedComponent implements OnInit {
   uid: any;
   item: any;
 
-  constructor(private ps: ProductService, private cs: CartService,public local: LocalStorageService) { 
+  constructor(private ps: ProductService, private cs: CartService,public local: LocalStorageService,private fs: FavoriteService) { 
     this.getProduct();
   }
 
@@ -46,6 +47,7 @@ export class RecommendedComponent implements OnInit {
         this.cs.add(this.uid , this.item).subscribe(
           data => {
             alert('เพิ่มสินค้าสำเร็จ')
+            this.getProduct();
           },
           err => {
             console.log(err);
@@ -58,5 +60,25 @@ export class RecommendedComponent implements OnInit {
     )
   }
 
+  getFav(pid: string){
+    this.uid = this.local.get('user').result.id;
+    this.ps.getSomeProduct(pid).subscribe(
+      (data) => {
+        this.item = data;
+        console.log("getSomeProduct Work")
+        this.fs.add2Fav(this.uid , this.item).subscribe(
+          data => {
+            alert('เพิ่มสินค้าสำเร็จ')
+          },
+          err => {
+            console.log(err);
+            alert('เพิ่มสินค้าสำเร็จไม่สำเร็จ!');
+          });
+      },
+      (err) => {
+
+      }
+    )
+  }
 
 }
